@@ -1,68 +1,74 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 
-export default function Index() {
+export default function App() {
   return (
-    <View style={styles.container}>
-    
-      <View style={styles.triangle} />
-
-      <View style={styles.rectangle}>
-        <Text style={styles.rectangleText}>Hiswan Halim</Text>
-      </View>
-
-
-      <View style={styles.capsule}>
-        <Text style={styles.capsuleText}>105841112722</Text>
-      </View>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "space-around",
-    paddingVertical: 250,
-  },
-
-  triangle: {
-    width: 0,
-    height: 0,
-    backgroundColor: "transparent",
-    borderStyle: "solid",
-    borderLeftWidth: 50,
-    borderRightWidth: 50,
-    borderBottomWidth: 100,
-    borderLeftColor: "transparent",
-    borderRightColor: "transparent",
-    borderBottomColor: "blue",
-  },
-
-  rectangle: {
-    backgroundColor: "#2196F3",
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 10,
-  },
-
-  rectangleText: {
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 18,
-  },
-
-  capsule: {
-    backgroundColor: "black",
-    paddingHorizontal: 30,
-    paddingVertical: 12,
-    borderRadius: 150,
-  },
-
-  capsuleText: {
-    color: "white",
+    <View style={{
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: 'mistyrose',
+    }}>
+      
+      {/* Segitiga */}
+      <View style={{
+        width: 0,
+        height: 0,
+        borderLeftWidth: 50,
+        borderRightWidth: 50,
+        borderBottomWidth: 90,
+        borderLeftColor: 'transparent',
+        borderRightColor: 'transparent',
+        borderBottomColor: 'salmon',
+        marginBottom: 20,
+      }} />
+{/* persegi panjang */}
+<View style={{
+  backgroundColor: 'plum',
+  paddingHorizontal: 20,
+  paddingVertical: 8,
+  marginBottom: 20,
+  width: 250,
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+}}>
+  <Image
+    source={{ uri: 'https://cdn-icons-png.flaticon.com/512/3737/3737570.png' }}
+    style={{ width: 30, height: 30, marginBottom: 6 }} // gunakan marginBottom, bukan marginRight
+  />
+  <Text style={{
     fontSize: 16,
-    fontWeight: "bold",
-  },
-});
+    color: "white",
+    fontWeight: 'bold'
+  }}>DZULVIANA</Text>
+</View>
+
+
+{/* Pill - stambuk */}
+<View style={{
+  backgroundColor: 'lightpink',
+  paddingHorizontal: 20,
+  paddingVertical: 8,
+  borderRadius: 150,
+  marginBottom: 20,
+  width: 250,
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+}}>
+  <Image
+    source={{ uri: 'https://images.icon-icons.com/1286/PNG/512/30_85244.png' }}
+    style={{ width: 30, height: 30, marginBottom: 6 }} // gunakan marginBottom, bukan marginRight
+  />
+  <Text style={{
+    fontSize: 16,
+    color: "white",
+    fontWeight: 'bold'
+  }}>105841112222</Text>
+</View>
+
+
+ 
+</View>
+  );
+}
