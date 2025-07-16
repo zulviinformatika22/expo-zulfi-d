@@ -2,80 +2,28 @@ import { MaterialIcons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
+// Data gambar awal
 const initialGridImages = [
-  {
-    id: 1,
-    mainSrc: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80',
-    altSrc: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=200&q=80',
-    isFlipped: false,
-    scale: 1,
-  },
-  {
-    id: 2,
-    mainSrc: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=200&q=80',
-    altSrc: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=200&q=80',
-    isFlipped: false,
-    scale: 1,
-  },
-  {
-    id: 3,
-    mainSrc: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=200&q=80',
-    altSrc: 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=200&q=80',
-    isFlipped: false,
-    scale: 1,
-  },
-  {
-    id: 4,
-    mainSrc: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=200&q=80',
-    altSrc: 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=200&q=80',
-    isFlipped: false,
-    scale: 1,
-  },
-  {
-    id: 5,
-    mainSrc: 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=200&q=80',
-    altSrc: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=200&q=80',
-    isFlipped: false,
-    scale: 1,
-  },
-  {
-    id: 6,
-    mainSrc: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=200&q=80',
-    altSrc: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=200&q=80',
-    isFlipped: false,
-    scale: 1,
-  },
-  {
-    id: 7,
-    mainSrc: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=200&q=80',
-    altSrc: 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=200&q=80',
-    isFlipped: false,
-    scale: 1,
-  },
-  {
-    id: 8,
-    mainSrc: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80',
-    altSrc: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=200&q=80',
-    isFlipped: false,
-    scale: 1,
-  },
-  {
-    id: 9,
-    mainSrc: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=200&q=80',
-    altSrc: 'https://images.unsplash.com/photo-1518715308788-300e1e1e2d4c?auto=format&fit=crop&w=200&q=80',
-    isFlipped: false,
-    scale: 1,
-  },
+  { id: 1, mainSrc: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80', altSrc: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=200&q=80', isFlipped: false, scale: 1 },
+  { id: 2, mainSrc: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=200&q=80', altSrc: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=200&q=80', isFlipped: false, scale: 1 },
+  { id: 3, mainSrc: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=200&q=80', altSrc: 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=200&q=80', isFlipped: false, scale: 1 },
+  { id: 4, mainSrc: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=200&q=80', altSrc: 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=200&q=80', isFlipped: false, scale: 1 },
+  { id: 5, mainSrc: 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=200&q=80', altSrc: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=200&q=80', isFlipped: false, scale: 1 },
+  { id: 6, mainSrc: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=200&q=80', altSrc: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=200&q=80', isFlipped: false, scale: 1 },
+  { id: 7, mainSrc: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=200&q=80', altSrc: 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=200&q=80', isFlipped: false, scale: 1 },
+  { id: 8, mainSrc: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80', altSrc: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=200&q=80', isFlipped: false, scale: 1 },
+  { id: 9, mainSrc: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=200&q=80', altSrc: 'https://images.unsplash.com/photo-1518715308788-300e1e1e2d4c?auto=format&fit=crop&w=200&q=80', isFlipped: false, scale: 1 },
 ];
 
 export default function Index() {
   const [gridImages, setGridImages] = useState(initialGridImages);
 
+  // Handler saat gambar diklik
   const handleImagePress = (imageId: number) => {
     setGridImages(currentImages =>
       currentImages.map(image => {
         if (image.id === imageId) {
-          const newScale = Math.min(image.scale * 1.2, 2); // max scale is 2
+          const newScale = Math.min(image.scale * 1.2, 2); // Maksimum scale 2x
           return {
             ...image,
             isFlipped: !image.isFlipped,
@@ -89,27 +37,35 @@ export default function Index() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      {/* Segitiga */}
       <View style={styles.triangle} />
 
+      {/* Gambar utama */}
       <View style={styles.rectangle}>
         <Image
-          source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-yIx_1bTcgD8-Ru-zZeAsYL3STKv5fKVAGw&s" }}
+          source={{
+            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-yIx_1bTcgD8-Ru-zZeAsYL3STKv5fKVAGw&s",
+          }}
           style={styles.image}
           resizeMode="cover"
         />
       </View>
 
+      {/* Nomor dan ikon */}
       <View style={styles.pill}>
         <MaterialIcons name="favorite" size={24} color="white" />
         <Text style={styles.pillText}>105841112222</Text>
       </View>
 
+      {/* Nama */}
       <View style={styles.textContainer}>
         <Text style={styles.redText}>Dzulviana</Text>
       </View>
 
+      {/* Lingkaran kecil */}
       <View style={styles.circle} />
 
+      {/* Grid gambar */}
       <View style={styles.gridContainer}>
         {gridImages.map(image => (
           <TouchableOpacity
@@ -119,7 +75,10 @@ export default function Index() {
           >
             <Image
               source={{ uri: image.isFlipped ? image.altSrc : image.mainSrc }}
-              style={[styles.gridImage, { transform: [{ scale: image.scale }] }]}
+              style={[
+                styles.gridImage,
+                { transform: [{ scale: image.scale }] },
+              ]}
               resizeMode="cover"
             />
           </TouchableOpacity>
@@ -156,7 +115,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     marginBottom: 20,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   image: {
     width: "100%",
@@ -187,7 +146,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#cdb4db",
     borderRadius: 10,
     padding: 10,
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 20,
   },
   redText: {
@@ -204,10 +163,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   gridContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    width: '100%',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    width: "100%",
     maxWidth: 330,
     marginTop: 20,
   },
@@ -215,13 +174,13 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     margin: 5,
-    backgroundColor: '#fff0f5',
+    backgroundColor: "#fff0f5",
     borderRadius: 8,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   gridImage: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
     borderRadius: 8,
-  }
+  },
 });
