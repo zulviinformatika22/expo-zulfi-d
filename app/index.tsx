@@ -2,32 +2,30 @@ import { MaterialIcons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-// Data gambar awal
-const initialGridImages = [
-  { id: 1, mainSrc: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80', altSrc: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=200&q=80', isFlipped: false, scale: 1 },
-  { id: 2, mainSrc: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=200&q=80', altSrc: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=200&q=80', isFlipped: false, scale: 1 },
-  { id: 3, mainSrc: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=200&q=80', altSrc: 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=200&q=80', isFlipped: false, scale: 1 },
-  { id: 4, mainSrc: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=200&q=80', altSrc: 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=200&q=80', isFlipped: false, scale: 1 },
-  { id: 5, mainSrc: 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=200&q=80', altSrc: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=200&q=80', isFlipped: false, scale: 1 },
-  { id: 6, mainSrc: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=200&q=80', altSrc: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=200&q=80', isFlipped: false, scale: 1 },
-  { id: 7, mainSrc: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=200&q=80', altSrc: 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=200&q=80', isFlipped: false, scale: 1 },
-  { id: 8, mainSrc: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80', altSrc: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=200&q=80', isFlipped: false, scale: 1 },
-  { id: 9, mainSrc: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=200&q=80', altSrc: 'https://images.unsplash.com/photo-1518715308788-300e1e1e2d4c?auto=format&fit=crop&w=200&q=80', isFlipped: false, scale: 1 },
+const initialImageGridData = [
+  { id: 1, frontImage: 'https://picsum.photos/id/101/200', backImage: 'https://picsum.photos/id/102/200', flipped: false, scaleValue: 1 },
+  { id: 2, frontImage: 'https://picsum.photos/id/103/200', backImage: 'https://picsum.photos/id/104/200', flipped: false, scaleValue: 1 },
+  { id: 3, frontImage: 'https://picsum.photos/id/105/200', backImage: 'https://picsum.photos/id/106/200', flipped: false, scaleValue: 1 },
+  { id: 4, frontImage: 'https://picsum.photos/id/107/200', backImage: 'https://picsum.photos/id/108/200', flipped: false, scaleValue: 1 },
+  { id: 5, frontImage: 'https://picsum.photos/id/109/200', backImage: 'https://picsum.photos/id/110/200', flipped: false, scaleValue: 1 },
+  { id: 6, frontImage: 'https://picsum.photos/id/111/200', backImage: 'https://picsum.photos/id/112/200', flipped: false, scaleValue: 1 },
+  { id: 7, frontImage: 'https://picsum.photos/id/113/200', backImage: 'https://picsum.photos/id/114/200', flipped: false, scaleValue: 1 },
+  { id: 8, frontImage: 'https://picsum.photos/id/115/200', backImage: 'https://picsum.photos/id/116/200', flipped: false, scaleValue: 1 },
+  { id: 9, frontImage: 'https://picsum.photos/id/117/200', backImage: 'https://picsum.photos/id/118/200', flipped: false, scaleValue: 1 },
 ];
 
 export default function Index() {
-  const [gridImages, setGridImages] = useState(initialGridImages);
+  const [imageGridData, setImageGridData] = useState(initialImageGridData);
 
-  // Handler saat gambar diklik
-  const handleImagePress = (imageId: number) => {
-    setGridImages(currentImages =>
-      currentImages.map(image => {
+  const onImagePress = (imageId: number) => {
+    setImageGridData(currentGrid =>
+      currentGrid.map(image => {
         if (image.id === imageId) {
-          const newScale = Math.min(image.scale * 1.2, 2); // Maksimum scale 2x
+          const updatedScale = Math.min(image.scaleValue * 1.2, 2);
           return {
             ...image,
-            isFlipped: !image.isFlipped,
-            scale: newScale,
+            flipped: !image.flipped,
+            scaleValue: updatedScale,
           };
         }
         return image;
@@ -37,47 +35,36 @@ export default function Index() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {/* Segitiga */}
-      <View style={styles.triangle} />
-
-      {/* Gambar utama */}
-      <View style={styles.rectangle}>
+      <View style={styles.headerBox}>
         <Image
-          source={{
-            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-yIx_1bTcgD8-Ru-zZeAsYL3STKv5fKVAGw&s",
-          }}
-          style={styles.image}
+          source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-yIx_1bTcgD8-Ru-zZeAsYL3STKv5fKVAGw&s" }}
+          style={styles.headerImage}
           resizeMode="cover"
         />
       </View>
-
-      {/* Nomor dan ikon */}
-      <View style={styles.pill}>
-        <MaterialIcons name="favorite" size={24} color="white" />
-        <Text style={styles.pillText}>105841112222</Text>
+      <View style={styles.orangeTriangle} />
+      <View style={styles.userBadge}>
+        <MaterialIcons name="person" size={24} color="white" />
+        <Text style={styles.userIdText}>105841112222</Text>
       </View>
-
-      {/* Nama */}
-      <View style={styles.textContainer}>
-        <Text style={styles.redText}>Dzulviana</Text>
+      <View style={styles.nameContainer}>
+        <Text style={styles.nameRed}>DZULFIANA</Text>
       </View>
+      <View style={styles.blueDot}></View>
 
-      {/* Lingkaran kecil */}
-      <View style={styles.circle} />
-
-      {/* Grid gambar */}
-      <View style={styles.gridContainer}>
-        {gridImages.map(image => (
+      <View style={styles.gridWrapper}>
+        {imageGridData.map(image => (
           <TouchableOpacity
             key={image.id}
-            onPress={() => handleImagePress(image.id)}
-            style={styles.gridCell}
+            onPress={() => onImagePress(image.id)}
+            style={styles.gridItem}
+            activeOpacity={0.8}
           >
             <Image
-              source={{ uri: image.isFlipped ? image.altSrc : image.mainSrc }}
+              source={{ uri: image.flipped ? image.backImage : image.frontImage }}
               style={[
                 styles.gridImage,
-                { transform: [{ scale: image.scale }] },
+                { transform: [{ scale: image.scaleValue }] }
               ]}
               resizeMode="cover"
             />
@@ -96,36 +83,36 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff0f5",
     paddingVertical: 60,
   },
-  triangle: {
-    width: 0,
-    height: 0,
-    borderLeftWidth: 40,
-    borderRightWidth: 40,
-    borderBottomWidth: 80,
-    borderLeftColor: "transparent",
-    borderRightColor: "transparent",
-    borderBottomColor: "#ffb6b9",
-    marginBottom: 20,
-  },
-  rectangle: {
+  headerBox: {
     width: 220,
     height: 110,
-    backgroundColor: "#fcd5ce",
+    backgroundColor: "#eee",
     borderRadius: 12,
     overflow: "hidden",
     marginBottom: 20,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
-  image: {
+  headerImage: {
     width: "100%",
     height: "100%",
   },
-  pill: {
+  orangeTriangle: {
+    width: 0,
+    height: 0,
+    borderLeftWidth: 40,
+    borderRightWidth: 40,
+    borderBottomWidth: 70,
+    borderLeftColor: "transparent",
+    borderRightColor: "transparent",
+    borderBottomColor: "orange",
+    marginBottom: 20,
+  },
+  userBadge: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#fcd5ce",
+    backgroundColor: "#4a90e2",
     borderRadius: 50,
     paddingHorizontal: 24,
     paddingVertical: 12,
@@ -136,51 +123,56 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 4,
   },
-  pillText: {
-    color: "#222",
+  userIdText: {
+    color: "white",
     fontWeight: "bold",
     fontSize: 18,
     marginLeft: 10,
   },
-  textContainer: {
-    backgroundColor: "#cdb4db",
+  nameContainer: {
+    backgroundColor: "#9a3cd0ff",
     borderRadius: 10,
+    marginTop: 20,
     padding: 10,
-    alignItems: "center",
-    marginBottom: 20,
+    alignItems: 'center',
   },
-  redText: {
+  nameRed: {
     color: "white",
     fontSize: 25,
     fontWeight: "bold",
     textAlign: "center",
   },
-  circle: {
+  nameWhite: {
+    color: "white",
+    fontWeight: "bold",
+  },
+  blueDot: {
     width: 50,
     height: 50,
     backgroundColor: "#b5ead7",
     borderRadius: 100,
-    marginTop: 10,
+    marginTop: 10
   },
-  gridContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    width: "100%",
+  gridWrapper: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    width: '100%',
     maxWidth: 330,
     marginTop: 20,
   },
-  gridCell: {
+  gridItem: {
     width: 100,
     height: 100,
     margin: 5,
-    backgroundColor: "#fff0f5",
+    backgroundColor: '#e0e0e0',
     borderRadius: 8,
-    overflow: "hidden",
+    overflow: 'hidden',
+    alignItems: 'center',     // added
+    justifyContent: 'center', // added
   },
   gridImage: {
-    width: "100%",
-    height: "100%",
-    borderRadius: 8,
-  },
+    width: 100,
+    height: 100,
+  }
 });
